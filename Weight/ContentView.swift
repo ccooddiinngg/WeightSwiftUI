@@ -12,8 +12,8 @@ import AVFoundation
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var hideBottomBar = false
-    @State private var weight = 1500
-    @State private var limit = 3600
+    @State private var useMetric = false
+    @State private var weight = 0.0
 
     var body: some View {
 
@@ -21,14 +21,17 @@ struct ContentView: View {
             Color.green
             VStack {
                 Spacer()
-                ScaleView(weight: $weight, hideBottomBar: $hideBottomBar, limit: $limit)
+                ScaleView(weight: $weight, useMetric: $useMetric, hideBottomBar: $hideBottomBar, onSubmit: onSubmit)
                     .offset(x:0, y:hideBottomBar ? 180:0).animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
             }
         }.ignoresSafeArea()
 
     }
 
-
+    func onSubmit(weight: Double) {
+        self.weight = weight
+        print(self.weight)
+    }
 }
 
 

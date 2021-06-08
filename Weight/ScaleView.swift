@@ -8,95 +8,126 @@
 import SwiftUI
 
 struct ScaleView: View {
-    @Binding var weight: Int
+    @Binding var weight: Double
+    @Binding var useMetric: Bool
     @Binding var hideBottomBar: Bool
-    @Binding var limit: Int
+
+    var onSubmit: (Double)->()
 
     let date: String = {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: Date())
     }()
 
+    var button = ["7", "8", "9", "←", "4", "5", "6", "lb","1", "2", "3", "kg", "0", "00", ".", "✔︎"]
+
+    @State private var weightString : String = "0"
+
     var body: some View {
-        ZStack(alignment: .center) {
-            Rectangle()
-                .fill(hideBottomBar ? Color.green:Color.white)
-            VStack {
-                if !hideBottomBar {
-                    Text(date).font(.headline).foregroundColor(.gray).padding()
-                }
-                Spacer()
-                HStack {
-                    Button(action: {decrease(by: 10)}) {
-                        Image(systemName: "backward").font(.system(size: 30, weight: .thin, design: .default)).foregroundColor(.blue).padding()
-                    }
-                    Button(action: {decrease(by: 1)}) {
-                        Image(systemName: "backward.frame").font(.system(size: 30, weight: .thin, design: .default)).foregroundColor(.blue).padding()
-                    }
+        GeometryReader {proxy in
+            ZStack(alignment: .center) {
+                VStack {
+                    Text(date).font(.headline).foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))).padding()
 
-                    ZStack {
-                        Circle()
-                            .fill(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
-                        Circle()
-                            .fill(Color(#colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)))
-                            .frame(width: 110, height: 110, alignment: .center)
-                        VStack {
-                            Image(systemName: "circlebadge.fill")
-                                .padding(2)
-                                .foregroundColor(hideBottomBar ? .green:.red)
+                    HStack(alignment: .bottom) {
+                        Spacer()
+                        Text("\(weightString)")
+                            .font(.largeTitle)
+                            .foregroundColor(.blue)
+                        Text("lb")
+                            .font(.title3)
+                            .foregroundColor(.blue).padding(2)
+                    }.padding(.horizontal, 80)
 
-                            Text("\(weight/10).\(weight%10)")
-//                                    .font(Font.custom("Technology", size: 40))
-                                .font(.largeTitle)
-                                .foregroundColor(.blue)
-
-                            Text("lb")
-                                .font(.footnote)
-                                .foregroundColor(.blue).padding(2)
+                    let columns = Array(repeating: GridItem(.fixed(80)), count: 4)
+                    LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
+                        ForEach(button, id:\.self) {key in
+                            ZStack {
+                                Color.gray
+                                if  ["←", "lb","kg", "✔︎"].contains(key) {
+                                    Color(#colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1))
+                                }
+                                Button(action: {
+                                    onClick(key)
+                                }, label: {
+                                    Text(key).font(.largeTitle).fontWeight(.medium).foregroundColor(.white).padding()
+                                })
+                            }.frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).clipShape(Circle())
                         }
                     }
-                    .frame(width: 120, height: 120, alignment: .center)
-                    .offset(x: 0, y: hideBottomBar ? -90:0)
-                    .onTapGesture {
-                        hideBottomBar.toggle()
-                    }
 
-                    Button(action: {increase(by: 1)}) {
-                        Image(systemName: "forward.frame").font(.system(size: 30, weight: .thin, design: .default)).foregroundColor(.blue).padding()
-                    }
-                    Button(action: {increase(by: 10)}) {
-                        Image(systemName: "forward").font(.system(size: 30, weight: .thin, design: .default)).foregroundColor(.blue).padding()
-                    }
                 }
-                Spacer()
+            }.frame(width: proxy.size.width, height: proxy.size.width * 1.6, alignment: .center)
+        }
+    }
+
+    func onClick(_ key: String) {
+        if key == "✔︎" {
+            if weightString.count == 0 {
+                weightString = "0"
+            }else if weightString.last == "." {
+                weightString.append("0")
             }
+            onSubmit(Double(weightString)!)
+            return
         }
-        .frame(height: 300, alignment: .center)
-        .clipShape(RoundedRectangle(cornerRadius: 25.0))
-        .shadow(color: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), radius: 3, x: 5, y: 5)
 
+        if key == "lb" {
+            useMetric = false
+            return
+        }
+        if key == "kg" {
+            useMetric = true
+            return
+        }
+
+        if key == "←" {
+            guard weightString.count > 1 else {
+                weightString = "0"
+                return
+            }
+            if weightString.last == "." {
+                weightString.removeLast()
+            }
+            weightString.removeLast()
+            if weightString.count == 0 {
+                weightString = "0"
+            }
+            return
+        }
+
+        guard weightString.count < 7 else {
+            return
+        }
+
+        if key == "." {
+            guard !weightString.contains(".") else {
+                return
+            }
+            weightString.append(".")
+            return
+        }
+
+        if weightString.first == "0" && !weightString.contains(".") && key != "00"{
+            weightString = key
+        }else if weightString.first == "0" && !weightString.contains(".") && key == "00" {
+
+        }else if weightString.count == 6 && key == "00"{
+            weightString.append("0")
+        }else {
+            weightString.append(key)
+        }
     }
 
-    func decrease(by number: Int) {
-        if weight > number {
-            weight -= number
-        }
-    }
-
-    func increase(by number: Int) {
-        if weight < limit - number {
-            weight += number
-        }
-    }
 
 }
 
 
 struct ScaleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScaleView(weight: .constant(1500), hideBottomBar: .constant(false), limit: .constant(3600)).previewLayout(.sizeThatFits)
+        ScaleView(weight: .constant(150), useMetric: .constant(false), hideBottomBar: .constant(false), onSubmit: {_ in}).previewLayout(.sizeThatFits)
     }
 }
