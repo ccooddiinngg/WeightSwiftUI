@@ -14,9 +14,8 @@
 		A337DCC5266B440200C9B75D /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCC4266B440200C9B75D /* Persistence.swift */; };
 		A337DCC8266B440200C9B75D /* Weight.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A337DCC6266B440200C9B75D /* Weight.xcdatamodeld */; };
 		A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */; };
-		A337DCD2266C1A8D00C9B75D /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCD1266C1A8D00C9B75D /* ScaleView.swift */; };
-		A337DCD4266C97BA00C9B75D /* DigitalNumbers-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A337DCD3266C97BA00C9B75D /* DigitalNumbers-Regular.ttf */; };
-		A337DCD6266C99F600C9B75D /* Technology.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A337DCD5266C99F600C9B75D /* Technology.ttf */; };
+		A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCD1266C1A8D00C9B75D /* InputView.swift */; };
+		A3709A6126700F3B00D7D671 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6026700F3B00D7D671 /* InputManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +28,8 @@
 		A337DCC7266B440200C9B75D /* Weight.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weight.xcdatamodel; sourceTree = "<group>"; };
 		A337DCC9266B440200C9B75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
-		A337DCD1266C1A8D00C9B75D /* ScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
-		A337DCD3266C97BA00C9B75D /* DigitalNumbers-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DigitalNumbers-Regular.ttf"; sourceTree = "<group>"; };
-		A337DCD5266C99F600C9B75D /* Technology.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Technology.ttf; sourceTree = "<group>"; };
+		A337DCD1266C1A8D00C9B75D /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		A3709A6026700F3B00D7D671 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,16 +62,15 @@
 		A337DCBA266B440100C9B75D /* Weight */ = {
 			isa = PBXGroup;
 			children = (
+				A3709A6226700FAE00D7D671 /* Manager */,
 				A337DCBB266B440100C9B75D /* WeightApp.swift */,
 				A337DCBD266B440100C9B75D /* ContentView.swift */,
 				A337DCBF266B440200C9B75D /* Assets.xcassets */,
-				A337DCC4266B440200C9B75D /* Persistence.swift */,
 				A337DCC9266B440200C9B75D /* Info.plist */,
 				A337DCC6266B440200C9B75D /* Weight.xcdatamodeld */,
 				A337DCC1266B440200C9B75D /* Preview Content */,
 				A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */,
-				A337DCD1266C1A8D00C9B75D /* ScaleView.swift */,
-				A337DCD7266C9A4400C9B75D /* Font */,
+				A337DCD1266C1A8D00C9B75D /* InputView.swift */,
 			);
 			path = Weight;
 			sourceTree = "<group>";
@@ -86,13 +83,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		A337DCD7266C9A4400C9B75D /* Font */ = {
+		A3709A6226700FAE00D7D671 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				A337DCD3266C97BA00C9B75D /* DigitalNumbers-Regular.ttf */,
-				A337DCD5266C99F600C9B75D /* Technology.ttf */,
+				A337DCC4266B440200C9B75D /* Persistence.swift */,
+				A3709A6026700F3B00D7D671 /* InputManager.swift */,
 			);
-			path = Font;
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,8 +150,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A337DCC3266B440200C9B75D /* Preview Assets.xcassets in Resources */,
-				A337DCD4266C97BA00C9B75D /* DigitalNumbers-Regular.ttf in Resources */,
-				A337DCD6266C99F600C9B75D /* Technology.ttf in Resources */,
 				A337DCC0266B440200C9B75D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,8 +162,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A337DCC5266B440200C9B75D /* Persistence.swift in Sources */,
-				A337DCD2266C1A8D00C9B75D /* ScaleView.swift in Sources */,
+				A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */,
 				A337DCBE266B440100C9B75D /* ContentView.swift in Sources */,
+				A3709A6126700F3B00D7D671 /* InputManager.swift in Sources */,
 				A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */,
 				A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */,
 				A337DCC8266B440200C9B75D /* Weight.xcdatamodeld in Sources */,

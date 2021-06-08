@@ -11,18 +11,26 @@ import AVFoundation
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @State private var hideBottomBar = false
+
     @State private var useMetric = false
     @State private var weight = 0.0
+    @State private var showPanel = false
 
     var body: some View {
-
         ZStack {
-            Color.green
             VStack {
                 Spacer()
-                ScaleView(weight: $weight, useMetric: $useMetric, hideBottomBar: $hideBottomBar, onSubmit: onSubmit)
-                    .offset(x:0, y:hideBottomBar ? 180:0).animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
+                Button(action: {
+                    showPanel.toggle()
+                }, label: {
+                    ZStack {
+                        Circle().fill(Color.green).frame(height: 70).shadow(radius: 3)
+                        Image(systemName: "plus").font(.system(size: 56, weight: .regular, design: .rounded)).foregroundColor(.white)
+                    }.padding()
+                })
+            }
+            .sheet(isPresented: $showPanel) {
+                InputView()
             }
         }.ignoresSafeArea()
 

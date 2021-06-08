@@ -45,9 +45,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIAppFonts</key>
-	<array>
-		<string>DigitalNumbers-Regular.ttf</string>
-		<string>Technology.ttf</string>
-	</array>
+	<array/>
 </dict>
 </plist>
