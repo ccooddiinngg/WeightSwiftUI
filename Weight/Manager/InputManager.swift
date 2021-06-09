@@ -8,14 +8,20 @@
 import SwiftUI
 
 class InputManager: ObservableObject {
-    @Published var warning = " "
+    @Published private(set) var warning = " "
 
-    @Published var weight = "0"
+    @Published private(set) var weight = "0"
 
-    let textArray = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "C"]
+    let textArray = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "✗"]
 
-    let digitLimit = 4
-    let decimalLimit = 2
+    private let digitLimit = 4
+    private let decimalLimit = 2
+
+    private var useMetric: Bool
+
+    init(useMetric: Bool = false) {
+        self.useMetric = useMetric
+    }
 
     let dateString: String = {
         let dateFormatter = DateFormatter()
@@ -25,11 +31,6 @@ class InputManager: ObservableObject {
     }()
 
     let feedback = UIImpactFeedbackGenerator(style: .medium)
-
-    func setWarning(_ warning: String) {
-        self.warning = warning
-    }
-
 
     func handleInput(_ key: String) {
         if key == "✔︎" {
@@ -47,13 +48,12 @@ class InputManager: ObservableObject {
             return
         }
 
-        if key == "C" {
+        if key == "✗" {
             feedback.impactOccurred()
             weight = "0"
             warning = " "
             return
         }
-
 
         if key == "."  {
             if !weight.contains(".") {
@@ -63,13 +63,12 @@ class InputManager: ObservableObject {
             return
         }
 
-
         if weight.first == "0" && !weight.contains(".") {
             weight = key
         }else if weight.contains(".") && weight.suffix(from: weight.firstIndex(of: ".")!).count >= decimalLimit + 1 {
-            setWarning("\(decimalLimit) decimal place accuracy at most.")
+            warning = "\(decimalLimit) decimal place accuracy only."
         }else if (!weight.contains(".") && weight.count >= digitLimit)  || (weight.contains(".") && weight.prefix(while: {$0 != "."}).count > digitLimit) {
-            setWarning("\(digitLimit)-digit number at most.")
+            warning = "\(digitLimit)-digit number only."
         }else {
             weight.append(key)
         }
