@@ -23,51 +23,60 @@ struct InputView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationLink(
-                    destination: DatePickerView(date: $date),
-                    tag: 1,
-                    selection: $navigation,
-                    label: {EmptyView()})
+            ZStack {
+                Color("_Charcoal")
+                VStack {
+                    NavigationLink(
+                        destination: DatePickerView(date: $date),
+                        tag: 1,
+                        selection: $navigation,
+                        label: {EmptyView()})
 
-                NavigationLink(
-                    destination: RecordListView(),
-                    tag: 2,
-                    selection: $navigation,
-                    label: {EmptyView()})
+                    NavigationLink(
+                        destination: RecordListView(),
+                        tag: 2,
+                        selection: $navigation,
+                        label: {EmptyView()})
 
-                VStack(alignment: .center) {
-                    Text("\(weight)")
-                        .font(.largeTitle)
-                        .fontWeight(.regular)
-                        .foregroundColor(.primary)
-                        .padding()
-                    Divider()
-                    Text(warning)
-                        .font(.footnote)
-                        .opacity(0.8)
-                        .frame(height: 10)
-                }
 
-                let columns = Array(repeating: GridItem(.fixed(80)), count: 3)
-                LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
-                    ForEach(textArray, id:\.self) {key in
-                        Button(action: {
-                            handleInput(key)
-                        }, label: {
-                            Text(key)
-                        })
-                        .buttonStyle(CircleButton(bg: Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)), fg: Color.primary))
+                    VStack(alignment: .center) {
+                        Text("\(weight)")
+                            .font(.largeTitle)
+                            .fontWeight(.regular)
+                            .foregroundColor(.white)
+                            .padding()
+
+                        Text(warning)
+                            .font(.footnote)
+                            .foregroundColor(.white)
                     }
-                }.padding()
 
-                Button(action: {
-                    submit(date)
-                }, label: {
-                    Text("✔︎")
-                })
-                .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
-                .padding(.vertical, 10)
+                    let columns = Array(repeating: GridItem(.fixed(80)), count: 3)
+
+                    VStack {
+                        LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
+                            ForEach(textArray, id:\.self) {key in
+                                Button(action: {
+                                    handleInput(key)
+                                }, label: {
+                                    Text(key)
+                                })
+                                .buttonStyle(CircleButton(bg: Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)), fg: Color.primary))
+                            }
+                        }
+
+                        Button(action: {
+                            submit(date)
+                        }, label: {
+                            Text("✔︎")
+                        })
+                        .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
+                        .padding()
+
+                    }
+                    .padding()
+
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -162,6 +171,8 @@ struct InputView: View {
 
 struct ScaleView_Previews: PreviewProvider {
     static var previews: some View {
-        InputView().previewLayout(.sizeThatFits)
+        Group {
+            InputView().previewLayout(.sizeThatFits)
+        }
     }
 }

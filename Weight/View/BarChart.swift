@@ -49,14 +49,14 @@ struct Chart: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
 
-        for i in 1..<segmentY {
+        for i in 1..<segmentY+1 {
             p.move(to: CGPoint(x: 0, y: CGFloat(i) * rect.maxY / CGFloat(segmentY)))
             p.addLine(to: CGPoint(x: rect.maxX, y: CGFloat(i) * rect.maxY / CGFloat(segmentY)))
         }
 
-        for i in 1..<segmentX {
-            p.move(to: CGPoint(x: CGFloat(i) * rect.maxX / CGFloat(segmentX), y: rect.maxY))
-            p.addLine(to: CGPoint(x: CGFloat(i) * rect.maxX / CGFloat(segmentX), y: 0))
+        for i in 1..<segmentX+1{
+            p.move(to: CGPoint(x: CGFloat(i) * rect.maxX / CGFloat(segmentX+1), y: rect.maxY))
+            p.addLine(to: CGPoint(x: CGFloat(i) * rect.maxX / CGFloat(segmentX+1), y: 0))
         }
 
         return p
@@ -74,7 +74,7 @@ struct Bars: Shape {
         var p = Path()
 
         for (index, item) in items.enumerated() {
-            let x = CGFloat(index + 1) * rect.maxX / CGFloat(segmentX)
+            let x = CGFloat(index + 1) * rect.maxX / CGFloat(segmentX+1)
             let y = rect.maxY - rect.maxY * CGFloat(item) / CGFloat(segmentY)
 
             p.addLines([
@@ -90,8 +90,8 @@ struct Bars: Shape {
     }
 }
 
-struct Charts_Previews: PreviewProvider {
+struct BarChart_Previews: PreviewProvider {
     static var previews: some View {
-        BarChart(items: [12,34,23,12,35,46,78,88,90], chartX: 10, chartY: 5,barX: 10,barY: 100,barWidth: 20, frameColor: Color.blue,chartColor: .black.opacity(0.4), barColor: Color.blue)
+        BarChart(items: [12,34,23,12,35,46,90], chartX: 7, chartY: 5,barX: 7,barY: 100,barWidth: 20, frameColor: Color.blue,chartColor: .black.opacity(0.4), barColor: Color.blue).padding().previewLayout(.sizeThatFits)
     }
 }

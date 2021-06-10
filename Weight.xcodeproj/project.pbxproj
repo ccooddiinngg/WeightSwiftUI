@@ -15,9 +15,9 @@
 		A337DCC8266B440200C9B75D /* Weight.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A337DCC6266B440200C9B75D /* Weight.xcdatamodeld */; };
 		A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */; };
 		A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCD1266C1A8D00C9B75D /* InputView.swift */; };
-		A3648063267147160069DC23 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3648062267147160069DC23 /* DataManager.swift */; };
+		A3648063267147160069DC23 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3648062267147160069DC23 /* TabManager.swift */; };
 		A3709A67267077C800D7D671 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A66267077C800D7D671 /* AddButton.swift */; };
-		A3709A6B2670867000D7D671 /* HistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6A2670867000D7D671 /* HistoryListView.swift */; };
+		A3709A6B2670867000D7D671 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6A2670867000D7D671 /* ChartView.swift */; };
 		A3AD696F267181DB008D4EC7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD696E267181DB008D4EC7 /* BarChart.swift */; };
 		A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69722671E917008D4EC7 /* SettingView.swift */; };
 		A3AD69752671EB9C008D4EC7 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */; };
@@ -38,9 +38,9 @@
 		A337DCC9266B440200C9B75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A337DCD1266C1A8D00C9B75D /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
-		A3648062267147160069DC23 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		A3648062267147160069DC23 /* TabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManager.swift; sourceTree = "<group>"; };
 		A3709A66267077C800D7D671 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		A3709A6A2670867000D7D671 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
+		A3709A6A2670867000D7D671 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		A3AD696E267181DB008D4EC7 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		A3AD69722671E917008D4EC7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -82,7 +82,6 @@
 			children = (
 				A3709A6226700FAE00D7D671 /* Manager */,
 				A337DCBB266B440100C9B75D /* WeightApp.swift */,
-				A337DCBD266B440100C9B75D /* ContentView.swift */,
 				A337DCBF266B440200C9B75D /* Assets.xcassets */,
 				A337DCC9266B440200C9B75D /* Info.plist */,
 				A337DCC6266B440200C9B75D /* Weight.xcdatamodeld */,
@@ -105,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				A337DCC4266B440200C9B75D /* Persistence.swift */,
-				A3648062267147160069DC23 /* DataManager.swift */,
+				A3648062267147160069DC23 /* TabManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -113,11 +112,12 @@
 		A3709A632670675100D7D671 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A337DCBD266B440100C9B75D /* ContentView.swift */,
 				A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */,
 				A3AD697A2671F2B3008D4EC7 /* CardView.swift */,
 				A337DCD1266C1A8D00C9B75D /* InputView.swift */,
 				A3709A66267077C800D7D671 /* AddButton.swift */,
-				A3709A6A2670867000D7D671 /* HistoryListView.swift */,
+				A3709A6A2670867000D7D671 /* ChartView.swift */,
 				A3AD696E267181DB008D4EC7 /* BarChart.swift */,
 				A3AD69722671E917008D4EC7 /* SettingView.swift */,
 				A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */,
@@ -200,7 +200,7 @@
 				A337DCC5266B440200C9B75D /* Persistence.swift in Sources */,
 				A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */,
 				A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */,
-				A3648063267147160069DC23 /* DataManager.swift in Sources */,
+				A3648063267147160069DC23 /* TabManager.swift in Sources */,
 				A3AD697B2671F2B3008D4EC7 /* CardView.swift in Sources */,
 				A3AD69752671EB9C008D4EC7 /* DatePickerView.swift in Sources */,
 				A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */,
@@ -211,7 +211,7 @@
 				A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */,
 				A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */,
 				A337DCC8266B440200C9B75D /* Weight.xcdatamodeld in Sources */,
-				A3709A6B2670867000D7D671 /* HistoryListView.swift in Sources */,
+				A3709A6B2670867000D7D671 /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
