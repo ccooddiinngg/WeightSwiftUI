@@ -86,7 +86,7 @@ struct InputView: View {
                         HStack {
                             Text(dateFormatter.string(from: date))
                             Image(systemName: "calendar.circle.fill")
-                        }
+                        }.foregroundColor(.white)
                     })
 
                 }

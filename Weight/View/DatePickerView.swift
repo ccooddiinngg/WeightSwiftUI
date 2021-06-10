@@ -14,13 +14,11 @@ struct DatePickerView: View {
         ZStack {
             Color("_Charcoal")
             VStack {
-                HStack{}.frame(height: 100)
                 DatePicker("", selection: $date, displayedComponents: [.date]).datePickerStyle(GraphicalDatePickerStyle())
                     .background(Color("_LightGray"))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .padding()
                     .shadow(radius: 1)
-                Spacer()
             }
         }.ignoresSafeArea()
     }
