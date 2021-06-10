@@ -22,6 +22,9 @@
 		A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69722671E917008D4EC7 /* SettingView.swift */; };
 		A3AD69752671EB9C008D4EC7 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */; };
 		A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69762671F0C1008D4EC7 /* RecordListView.swift */; };
+		A3AD69792671F194008D4EC7 /* RecordRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69782671F194008D4EC7 /* RecordRowView.swift */; };
+		A3AD697B2671F2B3008D4EC7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD697A2671F2B3008D4EC7 /* CardView.swift */; };
+		A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		A3AD69722671E917008D4EC7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		A3AD69762671F0C1008D4EC7 /* RecordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListView.swift; sourceTree = "<group>"; };
+		A3AD69782671F194008D4EC7 /* RecordRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRowView.swift; sourceTree = "<group>"; };
+		A3AD697A2671F2B3008D4EC7 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,8 @@
 		A3709A632670675100D7D671 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */,
+				A3AD697A2671F2B3008D4EC7 /* CardView.swift */,
 				A337DCD1266C1A8D00C9B75D /* InputView.swift */,
 				A3709A66267077C800D7D671 /* AddButton.swift */,
 				A3709A6A2670867000D7D671 /* HistoryListView.swift */,
@@ -114,6 +122,7 @@
 				A3AD69722671E917008D4EC7 /* SettingView.swift */,
 				A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */,
 				A3AD69762671F0C1008D4EC7 /* RecordListView.swift */,
+				A3AD69782671F194008D4EC7 /* RecordRowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,11 +199,14 @@
 				A3AD696F267181DB008D4EC7 /* BarChart.swift in Sources */,
 				A337DCC5266B440200C9B75D /* Persistence.swift in Sources */,
 				A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */,
+				A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */,
 				A3648063267147160069DC23 /* DataManager.swift in Sources */,
+				A3AD697B2671F2B3008D4EC7 /* CardView.swift in Sources */,
 				A3AD69752671EB9C008D4EC7 /* DatePickerView.swift in Sources */,
 				A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */,
 				A337DCBE266B440100C9B75D /* ContentView.swift in Sources */,
 				A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */,
+				A3AD69792671F194008D4EC7 /* RecordRowView.swift in Sources */,
 				A3709A67267077C800D7D671 /* AddButton.swift in Sources */,
 				A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */,
 				A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */,

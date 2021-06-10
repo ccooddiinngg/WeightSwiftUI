@@ -9,7 +9,11 @@ import SwiftUI
 
 struct RecordListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(0..<10, id:\.self) {i in
+                RecordRowView()
+            }
+        }
     }
 }
 
