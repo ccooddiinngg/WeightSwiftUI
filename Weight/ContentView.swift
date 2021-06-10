@@ -11,13 +11,12 @@ import AVFoundation
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-    @State private var showInputPanel = false
-
+    @State private var tag = 0
     var body: some View {
-        NavigationView {
-            ChartView()
-                .navigationTitle("History")
+        TabView {
+            ChartView().tabItem { Image(systemName: "chart.bar.xaxis") }.tag(0)
+            InputView().tabItem {Image(systemName: "plus.circle.fill")}.tag(1)
+            SettingView().tabItem {Image(systemName: "gearshape.fill")}.tag(2)
         }
     }
 

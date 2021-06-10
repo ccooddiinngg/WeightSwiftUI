@@ -15,11 +15,13 @@
 		A337DCC8266B440200C9B75D /* Weight.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A337DCC6266B440200C9B75D /* Weight.xcdatamodeld */; };
 		A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */; };
 		A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCD1266C1A8D00C9B75D /* InputView.swift */; };
-		A3709A6126700F3B00D7D671 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6026700F3B00D7D671 /* InputManager.swift */; };
-		A3709A652670676C00D7D671 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A642670676C00D7D671 /* ChartView.swift */; };
+		A3648063267147160069DC23 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3648062267147160069DC23 /* DataManager.swift */; };
 		A3709A67267077C800D7D671 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A66267077C800D7D671 /* AddButton.swift */; };
-		A3709A6926707B0700D7D671 /* WeekChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6826707B0700D7D671 /* WeekChartView.swift */; };
 		A3709A6B2670867000D7D671 /* HistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6A2670867000D7D671 /* HistoryListView.swift */; };
+		A3AD696F267181DB008D4EC7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD696E267181DB008D4EC7 /* BarChart.swift */; };
+		A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69722671E917008D4EC7 /* SettingView.swift */; };
+		A3AD69752671EB9C008D4EC7 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */; };
+		A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69762671F0C1008D4EC7 /* RecordListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +35,13 @@
 		A337DCC9266B440200C9B75D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A337DCD1266C1A8D00C9B75D /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
-		A3709A6026700F3B00D7D671 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
-		A3709A642670676C00D7D671 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		A3648062267147160069DC23 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		A3709A66267077C800D7D671 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		A3709A6826707B0700D7D671 /* WeekChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekChartView.swift; sourceTree = "<group>"; };
 		A3709A6A2670867000D7D671 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
+		A3AD696E267181DB008D4EC7 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		A3AD69722671E917008D4EC7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		A3AD69762671F0C1008D4EC7 /* RecordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				A337DCC4266B440200C9B75D /* Persistence.swift */,
-				A3709A6026700F3B00D7D671 /* InputManager.swift */,
+				A3648062267147160069DC23 /* DataManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -104,10 +108,12 @@
 			isa = PBXGroup;
 			children = (
 				A337DCD1266C1A8D00C9B75D /* InputView.swift */,
-				A3709A642670676C00D7D671 /* ChartView.swift */,
 				A3709A66267077C800D7D671 /* AddButton.swift */,
-				A3709A6826707B0700D7D671 /* WeekChartView.swift */,
 				A3709A6A2670867000D7D671 /* HistoryListView.swift */,
+				A3AD696E267181DB008D4EC7 /* BarChart.swift */,
+				A3AD69722671E917008D4EC7 /* SettingView.swift */,
+				A3AD69742671EB9C008D4EC7 /* DatePickerView.swift */,
+				A3AD69762671F0C1008D4EC7 /* RecordListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,16 +187,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AD696F267181DB008D4EC7 /* BarChart.swift in Sources */,
 				A337DCC5266B440200C9B75D /* Persistence.swift in Sources */,
-				A3709A6926707B0700D7D671 /* WeekChartView.swift in Sources */,
+				A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */,
+				A3648063267147160069DC23 /* DataManager.swift in Sources */,
+				A3AD69752671EB9C008D4EC7 /* DatePickerView.swift in Sources */,
 				A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */,
 				A337DCBE266B440100C9B75D /* ContentView.swift in Sources */,
+				A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */,
 				A3709A67267077C800D7D671 /* AddButton.swift in Sources */,
-				A3709A6126700F3B00D7D671 /* InputManager.swift in Sources */,
 				A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */,
 				A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */,
 				A337DCC8266B440200C9B75D /* Weight.xcdatamodeld in Sources */,
-				A3709A652670676C00D7D671 /* ChartView.swift in Sources */,
 				A3709A6B2670867000D7D671 /* HistoryListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,7 +332,7 @@
 				DEVELOPMENT_TEAM = CHKKL3F5MG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Weight/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -346,7 +354,7 @@
 				DEVELOPMENT_TEAM = CHKKL3F5MG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Weight/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

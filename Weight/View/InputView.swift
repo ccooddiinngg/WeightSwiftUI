@@ -8,44 +8,52 @@
 import SwiftUI
 
 struct InputView: View {
-    @StateObject private var inputManager = InputManager()
-    @Environment(\.presentationMode) var presentation
 
+    @State private var weight = "0"
+    @State private var date = Date()
+    @State private var warning = " "
+    @State private var navigation : Int? = 0
+    @State private var useMetric: Bool = false
+
+    private let textArray = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "✗"]
+    private let digitLimit = 4
+    private let decimalLimit = 2
+
+    let feedback = UIImpactFeedbackGenerator(style: .medium)
+    
     var body: some View {
-        GeometryReader {proxy in
+        NavigationView {
             VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        presentation.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill").foregroundColor(.green).imageScale(.large).padding()
-                    })
-                }
+                NavigationLink(
+                    destination: DatePickerView(date: $date),
+                    tag: 1,
+                    selection: $navigation,
+                    label: {EmptyView()})
+
+                NavigationLink(
+                    destination: RecordListView(),
+                    tag: 2,
+                    selection: $navigation,
+                    label: {EmptyView()})
 
                 VStack(alignment: .center) {
-
-                    Text("\(inputManager.weight)")
-                        .font(.system(size: 50, weight: .medium, design: .rounded))
+                    Text("\(weight)")
+                        .font(.largeTitle)
                         .fontWeight(.regular)
                         .foregroundColor(.primary)
                         .padding()
-
-                    Text(inputManager.warning)
+                    Divider()
+                    Text(warning)
                         .font(.footnote)
                         .opacity(0.8)
-                        .frame(height: 20)
-
+                        .frame(height: 10)
                 }
-                .frame(height: 150)
-
-                Divider()
 
                 let columns = Array(repeating: GridItem(.fixed(80)), count: 3)
                 LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
-                    ForEach(inputManager.textArray, id:\.self) {key in
+                    ForEach(textArray, id:\.self) {key in
                         Button(action: {
-                            inputManager.handleInput(key)
+                            handleInput(key)
                         }, label: {
                             Text(key)
                         })
@@ -54,14 +62,28 @@ struct InputView: View {
                 }.padding()
 
                 Button(action: {
-                    inputManager.handleInput("✔︎")
-                    presentation.wrappedValue.dismiss()
+                    submit(date)
                 }, label: {
                     Text("✔︎")
                 })
                 .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
                 .padding(.vertical, 10)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        navigation = 1
+                    }, label: {
+                        HStack {
+                            Text(dateFormatter.string(from: date))
+                            Image(systemName: "calendar.circle.fill")
+                        }
+                    })
+
+                }
+
+            }
+            .ignoresSafeArea()
 
         }
     }
@@ -84,7 +106,56 @@ struct InputView: View {
 
     }
 
-    
+    var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
+    }()
+
+    func handleInput(_ key: String) {
+        if key == "✗" {
+            feedback.impactOccurred()
+            weight = "0"
+            warning = " "
+            return
+        }
+
+        if key == "."  {
+            if !weight.contains(".") {
+                weight.append(".")
+            }
+            warning = " "
+            return
+        }
+
+        if weight.first == "0" && !weight.contains(".") {
+            weight = key
+        }else if weight.contains(".") && weight.suffix(from: weight.firstIndex(of: ".")!).count >= decimalLimit + 1 {
+            warning = "\(decimalLimit) decimal place accuracy only."
+        }else if (!weight.contains(".") && weight.count >= digitLimit)  || (weight.contains(".") && weight.prefix(while: {$0 != "."}).count > digitLimit) {
+            warning = "\(digitLimit)-digit number only."
+        }else {
+            weight.append(key)
+        }
+
+
+    }
+
+    func submit(_ time: Date) {
+        feedback.impactOccurred()
+
+        if weight.last == "." {
+            weight.append("0")
+        }
+
+        if let weightDouble = Double(weight) {
+            print(weightDouble)
+            print(time)
+            weight = "0"
+            warning = " "
+            navigation = 2
+        }
+    }
 
 }
 
