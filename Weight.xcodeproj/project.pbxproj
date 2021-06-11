@@ -25,6 +25,7 @@
 		A3AD697B2671F2B3008D4EC7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD697A2671F2B3008D4EC7 /* CardView.swift */; };
 		A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */; };
 		A3F4ED0326732F0500309F76 /* Calendar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4ED0226732F0500309F76 /* Calendar+.swift */; };
+		A3F57F852673C694000DD70C /* BottomDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F57F842673C694000DD70C /* BottomDrawer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		A3AD697A2671F2B3008D4EC7 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 		A3F4ED0226732F0500309F76 /* Calendar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+.swift"; sourceTree = "<group>"; };
+		A3F57F842673C694000DD70C /* BottomDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				A3AD69762671F0C1008D4EC7 /* RecordListView.swift */,
 				A3AD69782671F194008D4EC7 /* RecordRowView.swift */,
 				A3F4ED0226732F0500309F76 /* Calendar+.swift */,
+				A3F57F842673C694000DD70C /* BottomDrawer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3AD696F267181DB008D4EC7 /* BarChart.swift in Sources */,
+				A3F57F852673C694000DD70C /* BottomDrawer.swift in Sources */,
 				A337DCC5266B440200C9B75D /* Persistence.swift in Sources */,
 				A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */,
 				A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */,

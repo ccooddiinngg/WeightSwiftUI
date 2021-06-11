@@ -51,8 +51,41 @@ class PersistenceController {
         }
     }
 
-    func fetch(by: ChartData) -> [WeightRecord] {
-        []
+    func fetchLastRecords(with days: Int) -> [WeightRecord] {
+        let today = Calendar.current.numberOfDaysBetween(startDay, and: Date())
+        let from = today - days + 1
+        let fetchRequest = NSFetchRequest<WeightRecord>(entityName: "WeightRecord")
+
+        let results = from...today
+        return results.map {days in
+            fetchRequest.predicate = NSPredicate(format: "days == %i", days)
+            if let record = try? container.viewContext.fetch(fetchRequest).first {
+                return record
+            }
+            let record = WeightRecord(context: container.viewContext)
+            record.id = UUID()
+            record.timestamp = startDay.addingTimeInterval(TimeInterval(60 * 60 * 24 * days))
+            return record
+        }
+    }
+
+    func fetchRecordOn(days: Int) -> WeightRecord? {
+        let fetchRequest = NSFetchRequest<WeightRecord>(entityName: "WeightRecord")
+        fetchRequest.predicate = NSPredicate(format: "days == %i", days)
+
+        do {
+            let record = try container.viewContext.fetch(fetchRequest)
+            return record.first
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+
+    func fetchRecordOn(date: Date) -> WeightRecord? {
+        let days = Calendar.current.numberOfDaysBetween(startDay, and: date)
+
+        return fetchRecordOn(days: days)
     }
 
 }

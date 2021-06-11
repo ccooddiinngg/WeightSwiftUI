@@ -11,9 +11,10 @@ struct InputView: View {
 
     @State private var weight = "0"
     @State private var date = Date()
-    @State private var warning = " "
     @State private var navigation : Int? = 0
     @State private var useMetric: Bool = false
+
+    @State private var tab = 0
 
     private let textArray = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "✗"]
     private let digitLimit = 4
@@ -23,75 +24,102 @@ struct InputView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationLink(
-                    destination: DatePicker("", selection: $date, displayedComponents: [.date]).datePickerStyle(GraphicalDatePickerStyle()),
-                    tag: 1,
-                    selection: $navigation,
-                    label: {EmptyView()})
+            GeometryReader {proxy in
+                ZStack {
+                    Color.clear.ignoresSafeArea()
+                    VStack {
+                        NavigationLink(
+                            destination: DatePicker("", selection: $date, displayedComponents: [.date]).datePickerStyle(GraphicalDatePickerStyle()),
+                            tag: 1,
+                            selection: $navigation,
+                            label: {EmptyView()})
 
-                NavigationLink(
-                    destination: RecordListView(),
-                    tag: 2,
-                    selection: $navigation,
-                    label: {EmptyView()})
+                        NavigationLink(
+                            destination: RecordListView(),
+                            tag: 2,
+                            selection: $navigation,
+                            label: {EmptyView()})
 
+                        Divider()
+                        buildCards()
+                        Divider()
 
-                VStack(alignment: .center) {
-                    Text("\(weight)")
-                        .font(.largeTitle)
-                        .fontWeight(.regular)
-                        .foregroundColor(.primary)
+                        let columns = Array(repeating: GridItem(.fixed(80)), count: 3)
+                        VStack {
+                            LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
+                                ForEach(textArray, id:\.self) {key in
+                                    Button(action: {
+                                        handleInput(key)
+                                    }, label: {
+                                        Text(key).foregroundColor(.black)
+                                    })
+                                    .buttonStyle(CircleButton(bg: Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)), fg: Color.primary))
+                                }
+                            }
+
+                            Button(action: {
+                                submit(date)
+                            }, label: {
+                                Text("✔︎")
+                            })
+                            .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
+                            .padding()
+
+                        }
                         .padding()
-
-                    Text(warning)
-                        .font(.footnote)
-                        .foregroundColor(.gray)
+                    }
                 }
 
-                let columns = Array(repeating: GridItem(.fixed(80)), count: 3)
-
-                VStack {
-                    LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
-                        ForEach(textArray, id:\.self) {key in
-                            Button(action: {
-                                handleInput(key)
-                            }, label: {
-                                Text(key)
-                            })
-                            .buttonStyle(CircleButton(bg: Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)), fg: Color.primary))
-                        }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            navigation = 1
+                        }, label: {
+                            HStack {
+                                Text(dateFormatter.string(from: date))
+                                Image(systemName: "calendar.circle.fill")
+                            }
+                        })
                     }
+                }
+            }
+        }
+    }
 
-                    Button(action: {
-                        submit(date)
-                    }, label: {
-                        Text("✔︎")
-                    })
-                    .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
+    func buildCards() -> some View {
+        let today = PersistenceController.shared.fetchRecordOn(date: Date())
+        let yesterday = PersistenceController.shared.fetchRecordOn(date: Date().addingTimeInterval(TimeInterval(-24 * 60 * 60)))
+        let twoDaysAgo = PersistenceController.shared.fetchRecordOn(date: Date().addingTimeInterval(TimeInterval(-48 * 60 * 60)))
+
+        return
+            HStack {
+                buildCard(on: twoDaysAgo, title: "2 Days")
+                buildCard(on: yesterday, title: "Yesterday")
+                buildCard(on: today, title: "Today")
+            }
+
+    }
+
+    func buildCard(on record: WeightRecord?, title: String) -> some View {
+        let weight = record == nil ? "-.-" : String(format: "%.2f",record!.weight)
+
+        return ZStack {
+            RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 1)
+            VStack {
+                Text(weight)
+                    .font(.subheadline)
+                    .fontWeight(.regular)
+                    .foregroundColor(.gray)
                     .padding()
 
-                }
-                .padding()
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.regular)
+                    .foregroundColor(.gray)
+                    .padding()
             }
-
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        navigation = 1
-                    }, label: {
-                        HStack {
-                            Text(dateFormatter.string(from: date))
-                            Image(systemName: "calendar.circle.fill")
-                        }
-                    })
-
-                }
-
-            }
-
-        }
-
+        }.padding(5)
+        .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
 
     struct CircleButton: ButtonStyle {
@@ -118,11 +146,16 @@ struct InputView: View {
         return formatter
     }()
 
+    var dateFormatterShort: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }()
+
     func handleInput(_ key: String) {
         if key == "✗" {
             feedback.impactOccurred()
             weight = "0"
-            warning = " "
             return
         }
 
@@ -130,16 +163,15 @@ struct InputView: View {
             if !weight.contains(".") {
                 weight.append(".")
             }
-            warning = " "
             return
         }
 
         if weight.first == "0" && !weight.contains(".") {
             weight = key
         }else if weight.contains(".") && weight.suffix(from: weight.firstIndex(of: ".")!).count >= decimalLimit + 1 {
-            warning = "\(decimalLimit) decimal place accuracy only."
+            print( "\(decimalLimit) decimal place accuracy only.")
         }else if (!weight.contains(".") && weight.count >= digitLimit)  || (weight.contains(".") && weight.prefix(while: {$0 != "."}).count > digitLimit) {
-            warning = "\(digitLimit)-digit number only."
+            print( "\(digitLimit)-digit number only.")
         }else {
             weight.append(key)
         }
@@ -159,7 +191,6 @@ struct InputView: View {
             print(date)
             PersistenceController.shared.add(weight: weightFloat, date: date)
             weight = "0"
-            warning = " "
             navigation = 2
         }
     }

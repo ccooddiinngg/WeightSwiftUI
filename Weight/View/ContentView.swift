@@ -11,16 +11,14 @@ import AVFoundation
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject var tabManager = TabManager(tabSelected: 0, functionTab: 1)
+//    @StateObject var tabManager = TabManager(tabSelected: 0, functionTab: 1)
+    @State private var tab = 1
 
     var body: some View {
-        TabView(selection: $tabManager.tabSelected) {
+        TabView(selection: $tab) {
             ChartView().tabItem { Image(systemName: "chart.bar.xaxis") }.tag(0)
             InputView().tabItem {Image(systemName: "plus.circle.fill")}.tag(1)
             SettingView().tabItem {Image(systemName: "gearshape.fill")}.tag(2)
-        }
-        .sheet(isPresented: $tabManager.functionTabSelected) {
-            InputView()
         }
     }
 

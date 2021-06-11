@@ -79,53 +79,27 @@ struct ChartView: View {
         }
     }
 
-
-    var barHeight: Int {
-        guard data.count > 0 else {
-            return 0
-        }
-        let minValue = data.min()!
-        let maxValue = data.max()!
-        if maxValue == 0 {
-            return 1
-        }
-        let high = maxValue / 0.9
-        let low = minValue * 0.9
-        let height = high - low
-
-        return Int(round(height))
-    }
-
-    var dataForChart: [Float] {
-        guard data.count > 0 else {
-            return []
-        }
-        let minValue = data.min()!
-        let offset = minValue * 0.9
-        return data.map {$0 - offset}
-
-    }
-
     @State private var selection = ChartData.seven
 
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
-                Picker(selection: $selection, label: Text("Picker"), content: {
-                    ForEach(ChartData.allCases, id:\.self) {category in
-                        Text(category.rawValue).tag(category.rawValue)
-                    }
-                })
-                .pickerStyle(SegmentedPickerStyle())
+            ZStack {
+                Color.clear.ignoresSafeArea()
+                VStack {
+                    Picker(selection: $selection, label: Text("Picker"), content: {
+                        ForEach(ChartData.allCases, id:\.self) {category in
+                            Text(category.rawValue).tag(category.rawValue)
+                        }
+                    })
+                    .pickerStyle(SegmentedPickerStyle())
 
-                BarChart(items: dataForChart, chartX: selection.chartX, chartY: 10, barX: selection.barX, barY: barHeight, barWidth: selection.barWidth, frameColor: Color.gray, chartColor: Color.black.opacity(0.6), barColor: .green)
-                    .frame(height: 400)
+                    BarChart(items: data, chartX: selection.chartX, chartY: 10, barX: selection.barX, barLow: 100,barHigh: 200, barWidth: selection.barWidth, frameColor: Color.gray, chartColor: Color.black.opacity(0.6), barColor: .green)
+                        .frame(height: 400)
 
-
-            }
-            .padding()
-            .navigationTitle("Progress")
+                    Spacer()
+                }
+                .padding()
+            }.navigationTitle("Progress")
         }
     }
 }

@@ -12,7 +12,8 @@ struct BarChart: View {
     var chartX: Int
     var chartY: Int
     var barX: Int
-    var barY: Int
+    var barLow: Float
+    var barHigh: Float
     var barWidth: CGFloat
 
     var frameColor: Color
@@ -23,7 +24,7 @@ struct BarChart: View {
         ZStack {
             ChartFrame().stroke(frameColor)
             Chart( segmentX: chartX, segmentY: chartY).stroke(chartColor, style: .init(lineWidth: 1, dash: [1, 3]))
-            Bars(items: items, segmentX: barX, segmentY: barY, barWidth: barWidth).fill(barColor)
+            Bars(items: items, posX: barX, low: barLow, high: barHigh, barWidth: barWidth).fill(barColor)
         }
     }
 }
@@ -65,8 +66,10 @@ struct Chart: Shape {
 
 struct Bars: Shape {
     var items: [Float]
-    var segmentX: Int
-    var segmentY: Int
+    var posX: Int
+
+    var low: Float
+    var high: Float
 
     var barWidth: CGFloat
 
@@ -74,8 +77,8 @@ struct Bars: Shape {
         var p = Path()
 
         for (index, item) in items.enumerated() {
-            let x = CGFloat(index + 1) * rect.maxX / CGFloat(segmentX+1)
-            let y = rect.maxY - rect.maxY * CGFloat(item) / CGFloat(segmentY)
+            let x = CGFloat(index + 1) * rect.maxX / CGFloat(posX+1)
+            let y = rect.maxY - rect.maxY * CGFloat(item - low) / CGFloat(high - low)
 
             p.addLines([
                 CGPoint(x: x - barWidth / 2, y: rect.maxY),
@@ -92,6 +95,6 @@ struct Bars: Shape {
 
 struct BarChart_Previews: PreviewProvider {
     static var previews: some View {
-        BarChart(items: [12,34,23,12,35,46,90], chartX: 7, chartY: 5,barX: 7,barY: 100,barWidth: 20, frameColor: Color.blue,chartColor: .black.opacity(0.4), barColor: Color.blue).padding().previewLayout(.sizeThatFits)
+        BarChart(items: [12,34,23,12,35,46,90], chartX: 7, chartY: 5,barX: 7,barLow: 0,barHigh: 100, barWidth: 20, frameColor: Color.blue,chartColor: .black.opacity(0.4), barColor: Color.blue).padding().previewLayout(.sizeThatFits)
     }
 }
