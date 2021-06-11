@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct RecordListView: View {
+    @FetchRequest(entity: WeightRecord.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \WeightRecord.timestamp, ascending: false)])
+    var fetchResult: FetchedResults<WeightRecord>
+
     var body: some View {
         List {
-            ForEach(0..<10, id:\.self) {i in
-                RecordRowView()
+            ForEach(fetchResult) {data in
+                RecordRowView(data: data)
             }
         }
     }
 }
-
-struct RecordListView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordListView()
-    }
-}
+//
+//struct RecordListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecordListView()
+//    }
+//}
