@@ -24,102 +24,66 @@ struct InputView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader {proxy in
-                ZStack {
-                    Color.clear.ignoresSafeArea()
-                    VStack {
-                        NavigationLink(
-                            destination: DatePicker("", selection: $date, displayedComponents: [.date]).datePickerStyle(GraphicalDatePickerStyle()),
-                            tag: 1,
-                            selection: $navigation,
-                            label: {EmptyView()})
+            VStack {
+                Divider()
+                buildDisplayWindow()
+                Divider()
 
-                        NavigationLink(
-                            destination: RecordListView(),
-                            tag: 2,
-                            selection: $navigation,
-                            label: {EmptyView()})
-
-                        Divider()
-                        buildCards()
-                        Divider()
-
-                        let columns = Array(repeating: GridItem(.fixed(80)), count: 3)
-                        VStack {
-                            LazyVGrid(columns: columns, alignment: .center, spacing: 12) {
-                                ForEach(textArray, id:\.self) {key in
-                                    Button(action: {
-                                        handleInput(key)
-                                    }, label: {
-                                        Text(key).foregroundColor(.black)
-                                    })
-                                    .buttonStyle(CircleButton(bg: Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)), fg: Color.primary))
-                                }
-                            }
-
+                let columns = Array(repeating: GridItem(.fixed(50)), count: 3)
+                VStack {
+                    LazyVGrid(columns: columns, alignment: .center, spacing: 0) {
+                        ForEach(textArray, id:\.self) {key in
                             Button(action: {
-                                submit(date)
+                                handleInput(key)
                             }, label: {
-                                Text("✔︎")
+                                Text(key).foregroundColor(.black)
                             })
-                            .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
-                            .padding()
-
+                            .buttonStyle(CircleButton(bg: Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)), fg: Color.primary))
                         }
-                        .padding()
                     }
-                }
 
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            navigation = 1
-                        }, label: {
-                            HStack {
-                                Text(dateFormatter.string(from: date))
-                                Image(systemName: "calendar.circle.fill")
-                            }
-                        })
-                    }
+                    Button(action: {
+                        submit(date)
+                    }, label: {
+                        Text("✔︎")
+                    })
+                    .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
+                    .padding()
                 }
+                .padding()
+
+                NavigationLink(
+                    destination: DatePicker("", selection: $date, displayedComponents: [.date]).datePickerStyle(GraphicalDatePickerStyle()),
+                    tag: 1,
+                    selection: $navigation,
+                    label: {EmptyView()})
+
+                NavigationLink(
+                    destination: RecordListView(),
+                    tag: 2,
+                    selection: $navigation,
+                    label: {EmptyView()})
             }
+            .navigationBarHidden(true)
+
         }
     }
 
-    func buildCards() -> some View {
-        let today = PersistenceController.shared.fetchRecordOn(date: Date())
-        let yesterday = PersistenceController.shared.fetchRecordOn(date: Date().addingTimeInterval(TimeInterval(-24 * 60 * 60)))
-        let twoDaysAgo = PersistenceController.shared.fetchRecordOn(date: Date().addingTimeInterval(TimeInterval(-48 * 60 * 60)))
+    
 
-        return
-            HStack {
-                buildCard(on: twoDaysAgo, title: "2 Days")
-                buildCard(on: yesterday, title: "Yesterday")
-                buildCard(on: today, title: "Today")
-            }
-
-    }
-
-    func buildCard(on record: WeightRecord?, title: String) -> some View {
-        let weight = record == nil ? "-.-" : String(format: "%.2f",record!.weight)
-
-        return ZStack {
-            RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 1)
-            VStack {
-                Text(weight)
-                    .font(.subheadline)
-                    .fontWeight(.regular)
-                    .foregroundColor(.gray)
-                    .padding()
-
-                Text(title)
-                    .font(.subheadline)
-                    .fontWeight(.regular)
-                    .foregroundColor(.gray)
-                    .padding()
-            }
+    func buildDisplayWindow() -> some View {
+        HStack {
+            Button(action: {
+                navigation = 1
+            }, label: {
+                HStack {
+                    Text(dateFormatter.string(from: date))
+                    Image(systemName: "calendar.circle.fill")
+                }
+            })
+            Text(weight).font(.title).fontWeight(.regular).foregroundColor(Color("_Black"))
+                .frame(width: 120)
         }.padding(5)
-        .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
     }
 
     struct CircleButton: ButtonStyle {
@@ -129,12 +93,12 @@ struct InputView: View {
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding()
-                .font(.largeTitle)
+                .font(.title2)
                 .foregroundColor(fg)
                 .background(
                     ZStack {
                         Circle().fill(bg)
-                    }.frame(width: 70, height: 70, alignment: .center).shadow(radius: configuration.isPressed ? 0:1)
+                    }.frame(width: 50, height: 50, alignment: .center).shadow(radius: configuration.isPressed ? 0:1)
                 )
         }
 

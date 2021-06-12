@@ -51,7 +51,7 @@ class PersistenceController {
         }
     }
 
-    func fetchLastRecords(with days: Int) -> [WeightRecord] {
+    func fetchLastRecords(within days: Int) -> [WeightRecord] {
         let today = Calendar.current.numberOfDaysBetween(startDay, and: Date())
         let from = today - days + 1
         let fetchRequest = NSFetchRequest<WeightRecord>(entityName: "WeightRecord")

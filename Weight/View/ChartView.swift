@@ -52,8 +52,6 @@ enum ChartData: String, CaseIterable {
 
 struct ChartView: View {
     @Environment(\.managedObjectContext) var viewContext
-    @FetchRequest(entity: WeightRecord.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \WeightRecord.timestamp, ascending: true)])
-    var fetchResult: FetchedResults<WeightRecord>
 
 //    var mockData: [Float] = {
 //        var data = [Float]()
@@ -64,27 +62,19 @@ struct ChartView: View {
 //        return data
 //    }()
 
-    var data: [Float] {
-        let today = Calendar.current.numberOfDaysBetween(Date(timeIntervalSinceReferenceDate: 0), and: Date())
-        var startDay = today - selection.barX + 1
-        if let firstRecord = fetchResult.first?.days {
-            startDay = max(startDay, Int(firstRecord))
-        }
+    var data: [WeightRecord] {
+        PersistenceController.shared.fetchLastRecords(within: selection.barX)
+    }
 
-        return (startDay...today).map {day in
-            if let found = fetchResult.first(where: {$0.days == day}) {
-                return found.weight
-            }
-            return 0
-        }
+    var weightData: [Float] {
+        data.map {$0.weight}
     }
 
     @State private var selection = ChartData.seven
 
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.clear.ignoresSafeArea()
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     Picker(selection: $selection, label: Text("Picker"), content: {
                         ForEach(ChartData.allCases, id:\.self) {category in
@@ -93,14 +83,18 @@ struct ChartView: View {
                     })
                     .pickerStyle(SegmentedPickerStyle())
 
-                    BarChart(items: data, chartX: selection.chartX, chartY: 10, barX: selection.barX, barLow: 100,barHigh: 200, barWidth: selection.barWidth, frameColor: Color.gray, chartColor: Color.black.opacity(0.6), barColor: .green)
+                    CardBannerView(data: data)
+
+                    BarChart(items: weightData, chartX: selection.chartX, chartY: 10, barX: selection.barX, barLow: 120,barHigh: 180, barWidth: selection.barWidth, frameColor: Color.gray, chartColor: Color.black.opacity(0.6), barColor: .green)
                         .frame(height: 400)
 
-                    Spacer()
                 }
                 .padding()
-            }.navigationTitle("Progress")
+            }
+            .navigationTitle("Progress")
         }
+
+
     }
 }
 

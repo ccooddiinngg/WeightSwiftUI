@@ -26,6 +26,7 @@
 		A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */; };
 		A3F4ED0326732F0500309F76 /* Calendar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4ED0226732F0500309F76 /* Calendar+.swift */; };
 		A3F57F852673C694000DD70C /* BottomDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F57F842673C694000DD70C /* BottomDrawer.swift */; };
+		A3F57F8926744132000DD70C /* CardBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F57F8826744132000DD70C /* CardBannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+RoundedCorner.swift"; sourceTree = "<group>"; };
 		A3F4ED0226732F0500309F76 /* Calendar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+.swift"; sourceTree = "<group>"; };
 		A3F57F842673C694000DD70C /* BottomDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDrawer.swift; sourceTree = "<group>"; };
+		A3F57F8826744132000DD70C /* CardBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				A3AD69782671F194008D4EC7 /* RecordRowView.swift */,
 				A3F4ED0226732F0500309F76 /* Calendar+.swift */,
 				A3F57F842673C694000DD70C /* BottomDrawer.swift */,
+				A3F57F8826744132000DD70C /* CardBannerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */,
 				A3AD69792671F194008D4EC7 /* RecordRowView.swift in Sources */,
 				A3709A67267077C800D7D671 /* AddButton.swift in Sources */,
+				A3F57F8926744132000DD70C /* CardBannerView.swift in Sources */,
 				A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */,
 				A3F4ED0326732F0500309F76 /* Calendar+.swift in Sources */,
 				A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */,
