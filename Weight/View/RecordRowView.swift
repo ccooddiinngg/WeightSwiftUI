@@ -24,16 +24,17 @@ struct RecordRowView: View {
     var body: some View {
 
         ZStack(alignment: .leading) {
+
             Color.clear
             CardView(content: HStack {
-                Image(systemName: dayAndMonth.0).font(.largeTitle).foregroundColor(Color.green)
+                Image(systemName: dayAndMonth.0).font(.largeTitle).foregroundColor(Color.accentColor)
                 Text(dayAndMonth.1)
                 Text("\(data.days)")
                 Spacer()
                 Text("\(String(format: "%.2f", data.weight))")
                 Text("lb").foregroundColor(.gray)
                     .padding()
-            }, color: Color.green)
+            }, color: Color.accentColor)
         }
         .frame(height: 60)
     }

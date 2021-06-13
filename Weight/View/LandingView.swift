@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LandingView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var showSheet = false
-    @State private var selection = "None"
+
     let bg = LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
 
     var body: some View {
@@ -17,19 +18,21 @@ struct LandingView: View {
             VStack {
                 ScrollViewReader { proxy in
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
+                        HStack(spacing: 8) {
                             ForEach(0..<7) { item in
                                 dayCard().id(item)
                             }
-                        }.onAppear {
-                            proxy.scrollTo(6, anchor: .center)
+                            dayCardAddNewButton().id(7)
+                        }
+                        .padding(5)
+                        .onAppear {
+                            proxy.scrollTo(7, anchor: .trailing)
                         }
                     }
                 }
-
             }
             .sheet(isPresented: $showSheet) {
-                InputView()
+                InputView().environment(\.managedObjectContext, viewContext)
             }
             .navigationTitle("Daca")
             .toolbar {
@@ -45,7 +48,7 @@ struct LandingView: View {
 
         }, label: {
             ZStack {
-                Circle().fill(Color.green).shadow(radius: 3)
+                Circle().fill(Color.accentColor).shadow(radius: 3)
                 Image(systemName: "plus")
                     .font(.system(size: 40, weight: .regular, design: .rounded))
                     .foregroundColor(.white)
@@ -55,25 +58,42 @@ struct LandingView: View {
     }
 
     func dayCard() -> some View {
-        VStack {
-            HStack {
-                Text("Tue")
-                    .font(.system(size: 18, weight: .regular, design: .default))
-                    .foregroundColor(.blue)
-                Text("12")
-                    .font(.system(size: 20, weight: .regular, design: .default))
-                    .foregroundColor(Color(.gray))
+            VStack {
+                HStack {
+                    Text("Tue")
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                        .foregroundColor(Color.blue)
+                    Text("12")
+                        .font(.system(size: 24, weight: .regular, design: .default))
+                        .foregroundColor(Color.gray)
+                }.padding()
+
+
+                Button(action: {showSheet.toggle()}, label: {
+                    Text("*")
+                        .font(.system(size: 24, weight: .regular, design: .default))
+                        .foregroundColor(Color.primary)
+                        .padding(5)
+
+                })
+                .padding(5)
+                Image(systemName: "questionmark.circle.fill")
+                    .font(.system(size: 30, weight: .regular, design: .default))
+                    .foregroundColor(Color(.systemGray5))
+
             }
             .padding(5)
-            Button(action: {showSheet.toggle()}, label: {
-                Text("165.0")
-                    .font(.system(size: 24, weight: .regular, design: .default))
-                    .foregroundColor(Color(.gray))
-                    .padding(5)
-            })
+            .frame(width: 120, height: 160)
+            .background(RoundedRectangle(cornerRadius: 10).stroke(Color(.systemGray5)))
+
+    }
+
+    func dayCardAddNewButton() -> some View {
+        VStack {
+            addButton()
         }
-        .padding(5)
-        .background(RoundedRectangle(cornerRadius: 15).stroke(Color(.systemGray4)))
+        .frame(width: 120, height: 160)
+        .background(RoundedRectangle(cornerRadius: 10).stroke(Color(.systemGray5)))
 
     }
 }

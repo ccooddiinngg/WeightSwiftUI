@@ -46,7 +46,7 @@ struct InputView: View {
                     }, label: {
                         Text("✔︎")
                     })
-                    .buttonStyle(CircleButton(bg:Color.green, fg: Color.white))
+                    .buttonStyle(CircleButton(bg:Color.accentColor, fg: Color.white))
                     .padding()
                 }
                 .padding()
