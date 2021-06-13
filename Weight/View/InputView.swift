@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InputView: View {
-
+    @Environment(\.presentationMode) var presentation
     @State private var weight = "0"
     @State private var date = Date()
     @State private var navigation : Int? = 0
@@ -25,13 +25,12 @@ struct InputView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Divider()
+                Spacer()
                 buildDisplayWindow()
                 Divider()
-
-                let columns = Array(repeating: GridItem(.fixed(50)), count: 3)
+                let columns = Array(repeating: GridItem(.fixed(60)), count: 3)
                 VStack {
-                    LazyVGrid(columns: columns, alignment: .center, spacing: 0) {
+                    LazyVGrid(columns: columns, alignment: .center, spacing: 10) {
                         ForEach(textArray, id:\.self) {key in
                             Button(action: {
                                 handleInput(key)
@@ -52,19 +51,41 @@ struct InputView: View {
                 }
                 .padding()
 
-                NavigationLink(
-                    destination: DatePicker("", selection: $date, displayedComponents: [.date]).datePickerStyle(GraphicalDatePickerStyle()),
-                    tag: 1,
-                    selection: $navigation,
-                    label: {EmptyView()})
+                Spacer()
 
                 NavigationLink(
                     destination: RecordListView(),
-                    tag: 2,
+                    tag: 1,
                     selection: $navigation,
                     label: {EmptyView()})
             }
-            .navigationBarHidden(true)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {
+                        navigation = 1
+                    }, label: {
+                        Image(systemName: "list.bullet")
+                    })
+                }
+
+                ToolbarItem(placement: .principal) {
+                    Button(action: {
+                    }, label: {
+                        HStack {
+                            Text(dateFormatter.string(from: date))
+                        }
+                    })
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        presentation.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill")
+                    })
+                }
+
+            })
 
         }
     }
@@ -72,18 +93,7 @@ struct InputView: View {
     
 
     func buildDisplayWindow() -> some View {
-        HStack {
-            Button(action: {
-                navigation = 1
-            }, label: {
-                HStack {
-                    Text(dateFormatter.string(from: date))
-                    Image(systemName: "calendar.circle.fill")
-                }
-            })
-            Text(weight).font(.title).fontWeight(.regular).foregroundColor(Color("_Black"))
-                .frame(width: 120)
-        }.padding(5)
+        Text(weight=="0" ? "****. **":weight).font(.title).fontWeight(.regular).foregroundColor(weight=="0" ? Color.gray:Color.primary)
     }
 
     struct CircleButton: ButtonStyle {
@@ -98,7 +108,7 @@ struct InputView: View {
                 .background(
                     ZStack {
                         Circle().fill(bg)
-                    }.frame(width: 50, height: 50, alignment: .center).shadow(radius: configuration.isPressed ? 0:1)
+                    }.frame(width: 60, height: 60, alignment: .center).shadow(radius: configuration.isPressed ? 0:1)
                 )
         }
 
@@ -155,7 +165,7 @@ struct InputView: View {
             print(date)
             PersistenceController.shared.add(weight: weightFloat, date: date)
             weight = "0"
-            navigation = 2
+            navigation = 1
         }
     }
 

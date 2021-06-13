@@ -15,11 +15,13 @@ struct ContentView: View {
     @State private var tab = 1
 
     var body: some View {
-        TabView(selection: $tab) {
-            ChartView().tabItem { Image(systemName: "chart.bar.xaxis") }.tag(0)
-            InputView().tabItem {Image(systemName: "plus.circle.fill")}.tag(1)
-            SettingView().tabItem {Image(systemName: "gearshape.fill")}.tag(2)
-        }
+
+        LandingView()
+//        TabView(selection: $tab) {
+//            ChartView().tabItem { Image(systemName: "chart.bar.xaxis") }.tag(0)
+//            InputView().tabItem {Image(systemName: "plus.circle.fill")}.tag(1)
+//            SettingView().tabItem {Image(systemName: "gearshape.fill")}.tag(2)
+//        }
     }
 
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecordListView: View {
+    @Environment(\.presentationMode) var presentation
     @FetchRequest(entity: WeightRecord.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \WeightRecord.timestamp, ascending: false)])
     var fetchResult: FetchedResults<WeightRecord>
 
@@ -17,6 +18,15 @@ struct RecordListView: View {
                 RecordRowView(data: data)
             }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    presentation.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "xmark.circle.fill")
+                })
+            }
+        })
     }
 }
 //

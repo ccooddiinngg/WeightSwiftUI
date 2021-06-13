@@ -28,19 +28,13 @@ class PersistenceController {
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 
-    var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter
-    }()
 
     //MARK: - Func
     func add(weight: Float, date: Date, useMetric: Bool = false) {
         let entry = WeightRecord(context: container.viewContext)
         entry.id = UUID()
         entry.timestamp = date
-        entry.date = dateFormatter.string(from: date)
-        entry.metric = useMetric
+        entry.useMetric = useMetric
         entry.weight = weight
         entry.days = Int64(Calendar.current.numberOfDaysBetween(startDay, and: date))
 

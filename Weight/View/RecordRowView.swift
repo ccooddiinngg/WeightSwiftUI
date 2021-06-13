@@ -26,7 +26,7 @@ struct RecordRowView: View {
         ZStack(alignment: .leading) {
             Color.clear
             CardView(content: HStack {
-                Image(systemName: dayAndMonth.0).font(.largeTitle).foregroundColor(Color.red)
+                Image(systemName: dayAndMonth.0).font(.largeTitle).foregroundColor(Color.green)
                 Text(dayAndMonth.1)
                 Text("\(data.days)")
                 Spacer()
