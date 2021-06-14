@@ -11,7 +11,7 @@ struct CardView<Content: View>: View {
     var content: Content
     var color: Color
 
-    @State var offset: CGSize = CGSize(width: UIScreen.main.bounds.width, height: 0)
+    @State var offset: CGSize = CGSize(width: 0, height: 0)
 
     init(content: Content, color: Color = Color.blue) {
         self.color = color
@@ -31,7 +31,7 @@ struct CardView<Content: View>: View {
                     }
                     .offset(offset)
                     .onAppear {
-                        withAnimation(Animation.spring(response: 1, dampingFraction: 1, blendDuration: 0.2)) {
+                        withAnimation(.easeIn) {
                             offset.width = 0
                         }
                     }

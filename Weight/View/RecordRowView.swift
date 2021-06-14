@@ -9,27 +9,14 @@ import SwiftUI
 
 struct RecordRowView: View {
     var data: WeightRecord
-    
-    var dayAndMonth: (String, String) {
-        if let date = data.timestamp {
-            let components = Calendar.current.dateComponents([.day, .month], from: date)
-            if let dayInt = components.day , let monthInt = components.month {
-                let monthString = Calendar.current.monthSymbols[monthInt]
-                return ("\(dayInt).circle.fill", monthString)
-            }
-        }
-        return ("questionmark.circle.fill", " ")
-    }
 
     var body: some View {
-
         ZStack(alignment: .leading) {
-
             Color.clear
             CardView(content: HStack {
-                Image(systemName: dayAndMonth.0).font(.largeTitle).foregroundColor(Color.accentColor)
-                Text(dayAndMonth.1)
-                Text("\(data.days)")
+                Image(systemName: dayAndMonth(data.timestamp).0).font(.largeTitle).foregroundColor(Color.accentColor)
+                Text(dayAndMonth(data.timestamp).1)
+//                Text("\(data.days)")
                 Spacer()
                 Text("\(String(format: "%.2f", data.weight))")
                 Text("lb").foregroundColor(.gray)

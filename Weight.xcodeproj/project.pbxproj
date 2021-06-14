@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A31D2BB526756F290009D789 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31D2BB426756F290009D789 /* Constant.swift */; };
+		A31ECF492676F0CA0020BBF6 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECF482676F0CA0020BBF6 /* Weight.swift */; };
 		A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCBB266B440100C9B75D /* WeightApp.swift */; };
 		A337DCBE266B440100C9B75D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCBD266B440100C9B75D /* ContentView.swift */; };
 		A337DCC0266B440200C9B75D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A337DCBF266B440200C9B75D /* Assets.xcassets */; };
@@ -16,7 +17,6 @@
 		A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */; };
 		A337DCD2266C1A8D00C9B75D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCD1266C1A8D00C9B75D /* InputView.swift */; };
 		A3648063267147160069DC23 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3648062267147160069DC23 /* TabManager.swift */; };
-		A3709A6B2670867000D7D671 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3709A6A2670867000D7D671 /* ChartView.swift */; };
 		A3AD696F267181DB008D4EC7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD696E267181DB008D4EC7 /* BarChart.swift */; };
 		A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69722671E917008D4EC7 /* SettingView.swift */; };
 		A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD69762671F0C1008D4EC7 /* RecordListView.swift */; };
@@ -26,11 +26,11 @@
 		A3B0449E2675734B00E9FAA7 /* Weight.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3B0449C2675734B00E9FAA7 /* Weight.xcdatamodeld */; };
 		A3B044A0267576C800E9FAA7 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B0449F267576C800E9FAA7 /* LandingView.swift */; };
 		A3F4ED0326732F0500309F76 /* Calendar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4ED0226732F0500309F76 /* Calendar+.swift */; };
-		A3F57F8926744132000DD70C /* CardBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F57F8826744132000DD70C /* CardBannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A31D2BB426756F290009D789 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		A31ECF482676F0CA0020BBF6 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		A337DCB8266B440100C9B75D /* Weight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A337DCBB266B440100C9B75D /* WeightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightApp.swift; sourceTree = "<group>"; };
 		A337DCBD266B440100C9B75D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,7 +41,6 @@
 		A337DCCF266B5A6200C9B75D /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A337DCD1266C1A8D00C9B75D /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		A3648062267147160069DC23 /* TabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManager.swift; sourceTree = "<group>"; };
-		A3709A6A2670867000D7D671 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		A3AD696E267181DB008D4EC7 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		A3AD69722671E917008D4EC7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A3AD69762671F0C1008D4EC7 /* RecordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListView.swift; sourceTree = "<group>"; };
@@ -51,7 +50,6 @@
 		A3B0449D2675734B00E9FAA7 /* Weight.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weight.xcdatamodel; sourceTree = "<group>"; };
 		A3B0449F267576C800E9FAA7 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		A3F4ED0226732F0500309F76 /* Calendar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+.swift"; sourceTree = "<group>"; };
-		A3F57F8826744132000DD70C /* CardBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,13 +120,11 @@
 				A3AD697C2671F3E9008D4EC7 /* View+RoundedCorner.swift */,
 				A3AD697A2671F2B3008D4EC7 /* CardView.swift */,
 				A337DCD1266C1A8D00C9B75D /* InputView.swift */,
-				A3709A6A2670867000D7D671 /* ChartView.swift */,
 				A3AD696E267181DB008D4EC7 /* BarChart.swift */,
 				A3AD69722671E917008D4EC7 /* SettingView.swift */,
 				A3AD69762671F0C1008D4EC7 /* RecordListView.swift */,
 				A3AD69782671F194008D4EC7 /* RecordRowView.swift */,
 				A3F4ED0226732F0500309F76 /* Calendar+.swift */,
-				A3F57F8826744132000DD70C /* CardBannerView.swift */,
 				A3B0449F267576C800E9FAA7 /* LandingView.swift */,
 			);
 			path = View;
@@ -137,6 +133,7 @@
 		A3F4ED012672E8F400309F76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A31ECF482676F0CA0020BBF6 /* Weight.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,12 +219,11 @@
 				A337DCBE266B440100C9B75D /* ContentView.swift in Sources */,
 				A3AD69772671F0C1008D4EC7 /* RecordListView.swift in Sources */,
 				A3AD69792671F194008D4EC7 /* RecordRowView.swift in Sources */,
-				A3F57F8926744132000DD70C /* CardBannerView.swift in Sources */,
 				A3B0449E2675734B00E9FAA7 /* Weight.xcdatamodeld in Sources */,
 				A337DCD0266B5A6200C9B75D /* AudioPlayer.swift in Sources */,
 				A3F4ED0326732F0500309F76 /* Calendar+.swift in Sources */,
 				A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */,
-				A3709A6B2670867000D7D671 /* ChartView.swift in Sources */,
+				A31ECF492676F0CA0020BBF6 /* Weight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

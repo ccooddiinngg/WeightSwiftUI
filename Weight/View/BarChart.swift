@@ -8,51 +8,75 @@
 import SwiftUI
 
 struct BarChart: View {
-    var items: [Float]
-    var chartX: Int
-    var chartY: Int
-    var barX: Int
-    var barLow: Float
-    var barHigh: Float
+    var weights: [Weight]
+    var chartX: CGFloat
+    var chartY: CGFloat
+    var barX: CGFloat
+    var barLow: CGFloat
+    var barHigh: CGFloat
     var barWidth: CGFloat
 
     var frameColor: Color
     var chartColor: Color
     var barColor: Color
 
+    var items: [Float] {
+        weights.map { $0.weight}
+    }
+    var weekdays: [String] {
+        weights.map { (Calendar.current.getWeekday($0.date) ?? "?")}
+    }
     var body: some View {
         ZStack {
-            ChartFrame().stroke(frameColor)
-            Chart( segmentX: chartX, segmentY: chartY).stroke(chartColor, style: .init(lineWidth: 1, dash: [1, 3]))
             GeometryReader {proxy in
-                buildBar(proxy: proxy)
-            }
-            GeometryReader {proxy in
+                ChartFrame().stroke(frameColor)
+                ChartHorizontalLine( segmentX: chartX, segmentY: chartY).stroke(chartColor, style: .init(lineWidth: 1, dash: [1, 3]))
+                buildBars(proxy: proxy)
                 buildCoordinate(proxy: proxy)
+                buildItemsTitle(proxy: proxy)
             }
         }
         .animation(.easeIn)
         .clipped()
     }
 
-    func buildBar(proxy: GeometryProxy) -> some View {
+    @ViewBuilder
+    func buildBars(proxy: GeometryProxy) -> some View {
         ForEach(0..<items.count, id:\.self) {i in
-            Color.green
-                .frame(width: barWidth, height: max(0, CGFloat(400 * (items[i] - barLow) / (barHigh - barLow))))
-                .offset(x: CGFloat(i + 1) * proxy.frame(in: .local).maxX / (CGFloat(barX) + 1.0) - (barWidth / 2), y: proxy.frame(in: .local).maxY - CGFloat(400 * (items[i] - barLow) / (barHigh - barLow)))
+            buildBar(proxy: proxy, i: i)
         }
     }
 
+    func buildBar(proxy: GeometryProxy, i: Int) -> some View {
+        let x = (CGFloat(i) + 1) * proxy.size.width / (barX + 1.0) - (barWidth / 2)
+        let y = proxy.size.height - proxy.size.height * (CGFloat(items[i]) - barLow) / (barHigh - barLow)
+        return
+            Capsule().fill(Color.green)
+                .frame(width: barWidth, height: max(0, proxy.size.height * (CGFloat(items[i]) - barLow) / (barHigh - barLow)))
+                .offset(x: x, y: y)
+
+    }
+
     func buildCoordinate(proxy: GeometryProxy) -> some View {
-        ForEach(1..<chartY+1, id:\.self) {i in
-            Text("\(Int(((barHigh-barLow) / Float(chartY) * Float(i)) + barLow))")
+        ForEach(1..<Int(chartY)+1, id:\.self) {i in
+            Text("\(Int(((barHigh-barLow) / chartY * CGFloat(i)) + barLow))")
                 .font(.footnote)
                 .foregroundColor(.gray)
-                .offset(x: 0, y: proxy.frame(in: .local).maxY - proxy.frame(in: .local).maxY / CGFloat(chartY) * CGFloat(i))
+                .offset(x: 0, y: proxy.size.height - proxy.size.height / chartY * CGFloat(i))
+        }
+    }
+
+    func buildItemsTitle(proxy: GeometryProxy) -> some View {
+        ForEach(0..<items.count, id:\.self) {i in
+            ZStack {
+                Text("\(String(weekdays[i].first ?? "?"))").fontWeight(.semibold).foregroundColor(Color.gray)
+            }
+            .offset(x: (CGFloat(i) + 1) * proxy.size.width / (barX + 1.0) - 7, y: proxy.size.height - barWidth)
         }
     }
 }
 
+//Outer Line
 struct ChartFrame: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
@@ -67,14 +91,15 @@ struct ChartFrame: Shape {
     }
 }
 
-struct Chart: Shape {
-    var segmentX: Int
-    var segmentY: Int
+//Horizontal Line
+struct ChartHorizontalLine: Shape {
+    var segmentX: CGFloat
+    var segmentY: CGFloat
 
     func path(in rect: CGRect) -> Path {
         var p = Path()
 
-        for i in 1..<segmentY+1 {
+        for i in 1..<Int(segmentY)+1 {
             p.move(to: CGPoint(x: 0, y: CGFloat(i) * rect.maxY / CGFloat(segmentY)))
             p.addLine(to: CGPoint(x: rect.maxX, y: CGFloat(i) * rect.maxY / CGFloat(segmentY)))
         }
@@ -118,8 +143,46 @@ struct Chart: Shape {
 //    }
 //}
 
-struct BarChart_Previews: PreviewProvider {
-    static var previews: some View {
-        BarChart(items: [12,34,23,12,35,46,90], chartX: 7, chartY: 5,barX: 7,barLow: 0,barHigh: 100, barWidth: 20, frameColor: Color.blue,chartColor: .black.opacity(0.4), barColor: Color.blue).padding().previewLayout(.sizeThatFits)
+enum ChartData: String, CaseIterable {
+    case seven = "7 Day", thirty = "30 Day", ninety = "90 Day", year = "1 Year"
+
+    var chartX: CGFloat {
+        switch self {
+        case .seven:
+            return 7
+        case .thirty:
+            return 30
+        case .ninety:
+            return 30
+        case .year:
+            return 0
+        }
+    }
+
+    var barX: CGFloat {
+        switch self {
+        case .seven:
+            return 7
+        case .thirty:
+            return 30
+        case .ninety:
+            return 90
+        case .year:
+            return 365
+        }
+    }
+
+    var barWidth: CGFloat {
+        switch self {
+        case .seven:
+            return 30
+        case .thirty:
+            return 10
+        case .ninety:
+            return 2
+        case .year:
+            return 1
+        }
     }
 }
+

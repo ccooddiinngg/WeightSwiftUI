@@ -10,11 +10,10 @@ import SwiftUI
 struct InputView: View {
     @Environment(\.presentationMode) var presentation
     @State private var weight = "0"
-    @State private var date = Date()
-    @State private var navigation : Int? = 0
     @State private var useMetric: Bool = false
-
     @State private var tab = 0
+
+    @Binding var selected: Weight
 
     private let textArray = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "✗"]
     private let digitLimit = 4
@@ -42,7 +41,7 @@ struct InputView: View {
                     }
 
                     Button(action: {
-                        submit(date)
+                        submit()
                     }, label: {
                         Text("✔︎")
                     })
@@ -52,27 +51,13 @@ struct InputView: View {
                 .padding()
 
                 Spacer()
-
-                NavigationLink(
-                    destination: RecordListView(),
-                    tag: 1,
-                    selection: $navigation,
-                    label: {EmptyView()})
             }
             .toolbar(content: {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {
-                        navigation = 1
-                    }, label: {
-                        Image(systemName: "list.bullet")
-                    })
-                }
-
                 ToolbarItem(placement: .principal) {
                     Button(action: {
                     }, label: {
                         HStack {
-                            Text(dateFormatter.string(from: date))
+                            Text(dateFormatter.string(from: selected.date))
                         }
                     })
                 }
@@ -93,7 +78,9 @@ struct InputView: View {
     
 
     func buildDisplayWindow() -> some View {
-        Text(weight=="0" ? "****. **":weight).font(.title).fontWeight(.regular).foregroundColor(weight=="0" ? Color.gray:Color.primary)
+        let text = selected.weight == 0 ? "****.**":String(format: "%.2f", selected.weight)
+        return
+            Text(weight=="0" ? text:weight).font(.title).fontWeight(.regular).foregroundColor(weight=="0" ? Color.gray:Color.primary)
     }
 
     struct CircleButton: ButtonStyle {
@@ -153,7 +140,7 @@ struct InputView: View {
 
     }
 
-    func submit(_ time: Date) {
+    func submit() {
         feedback.impactOccurred()
 
         if weight.last == "." {
@@ -162,20 +149,12 @@ struct InputView: View {
 
         if let weightFloat = Float(weight) {
             print(weightFloat)
-            print(date)
-            PersistenceController.shared.add(weight: weightFloat, date: date)
+            print(selected.date)
+            PersistenceController.shared.add(weight: weightFloat, date: selected.date)
             weight = "0"
-            navigation = 1
+            presentation.wrappedValue.dismiss()
         }
     }
 
 }
 
-
-struct ScaleView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            InputView().previewLayout(.sizeThatFits)
-        }
-    }
-}
