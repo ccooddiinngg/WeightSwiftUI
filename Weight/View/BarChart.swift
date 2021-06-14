@@ -36,7 +36,6 @@ struct BarChart: View {
                 buildItemsTitle(proxy: proxy)
             }
         }
-        .animation(.easeIn)
         .clipped()
     }
 
@@ -69,9 +68,12 @@ struct BarChart: View {
     func buildItemsTitle(proxy: GeometryProxy) -> some View {
         ForEach(0..<items.count, id:\.self) {i in
             ZStack {
-                Text("\(String(weekdays[i].first ?? "?"))").fontWeight(.semibold).foregroundColor(Color.gray)
+                Text("\(String(weekdays[i].first ?? "?"))")
+                    .font(.system(size: 20, weight: .regular, design: .rounded))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.gray)
             }
-            .offset(x: (CGFloat(i) + 1) * proxy.size.width / (barX + 1.0) - 7, y: proxy.size.height - barWidth)
+            .offset(x: (CGFloat(i) + 1) * proxy.size.width / (barX + 1.0) - 10, y: proxy.size.height - barWidth)
         }
     }
 }

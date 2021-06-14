@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A31D2BB526756F290009D789 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31D2BB426756F290009D789 /* Constant.swift */; };
+		A31D342C2677DC0C00DBB607 /* CardsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31D342B2677DC0C00DBB607 /* CardsListView.swift */; };
 		A31ECF492676F0CA0020BBF6 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECF482676F0CA0020BBF6 /* Weight.swift */; };
 		A337DCBC266B440100C9B75D /* WeightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCBB266B440100C9B75D /* WeightApp.swift */; };
 		A337DCBE266B440100C9B75D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A337DCBD266B440100C9B75D /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		A31D2BB426756F290009D789 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		A31D342B2677DC0C00DBB607 /* CardsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsListView.swift; sourceTree = "<group>"; };
 		A31ECF482676F0CA0020BBF6 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		A337DCB8266B440100C9B75D /* Weight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A337DCBB266B440100C9B75D /* WeightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightApp.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				A3AD69782671F194008D4EC7 /* RecordRowView.swift */,
 				A3F4ED0226732F0500309F76 /* Calendar+.swift */,
 				A3B0449F267576C800E9FAA7 /* LandingView.swift */,
+				A31D342B2677DC0C00DBB607 /* CardsListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				A337DCC5266B440200C9B75D /* Persistence.swift in Sources */,
 				A3AD69732671E917008D4EC7 /* SettingView.swift in Sources */,
 				A3AD697D2671F3E9008D4EC7 /* View+RoundedCorner.swift in Sources */,
+				A31D342C2677DC0C00DBB607 /* CardsListView.swift in Sources */,
 				A3648063267147160069DC23 /* TabManager.swift in Sources */,
 				A3B044A0267576C800E9FAA7 /* LandingView.swift in Sources */,
 				A3AD697B2671F2B3008D4EC7 /* CardView.swift in Sources */,
