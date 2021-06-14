@@ -58,11 +58,17 @@ struct BarChart: View {
 
     func buildCoordinate(proxy: GeometryProxy) -> some View {
         ForEach(1..<Int(chartY)+1, id:\.self) {i in
-            Text("\(Int(((barHigh-barLow) / chartY * CGFloat(i)) + barLow))")
+            Text(coordinate(i: i))
                 .font(.footnote)
                 .foregroundColor(.gray)
                 .offset(x: 0, y: proxy.size.height - proxy.size.height / chartY * CGFloat(i))
         }
+    }
+
+    func coordinate(i: Int) -> String {
+        let value = (barHigh-barLow) / chartY * CGFloat(i) + barLow
+        let valueString = String(format: "%.1f", value)
+        return valueString
     }
 
     func buildItemsTitle(proxy: GeometryProxy) -> some View {

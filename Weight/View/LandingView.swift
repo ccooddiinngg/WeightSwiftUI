@@ -13,10 +13,10 @@ class BarRange: ObservableObject {
 
     func setBarRange(_ weight: Float) {
         if weight > high {
-            high = weight / 0.99
+            high = ((weight / 0.99)).rounded(.up)
         }
         if weight <= low {
-            low = weight * 0.99
+            low = ((weight * 0.99)).rounded(.down)
         }
     }
 }

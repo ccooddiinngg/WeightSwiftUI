@@ -25,7 +25,7 @@ struct RecordRowView: View {
                 Text("\(String(format: "%.2f", data.weight))")
                 Text("lb").foregroundColor(.gray)
                     .padding()
-            }, color: Color.gray)
+            }, color: Color(.systemGray4))
         }
         .frame(height: 60)
     }
